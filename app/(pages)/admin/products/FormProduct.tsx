@@ -20,19 +20,15 @@ const FormProduct: React.FC<Props> = ({
     loading,
   } = useForm(defaultProductData);
   const dataProduct = createProductData(form);
-  const { sendData, error } = usePostData({
+  const { sendData } = usePostData({
     setData: setDataProducts
   });
   
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     sendData(dataProduct);
-    if (!error) {
       handleModal();
       setForm(defaultProductData);
-    } else {
-      alert('Please input valid data, each input must be filled in');
-    }
   }
   
   return (

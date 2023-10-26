@@ -1,13 +1,11 @@
 import axios from "axios";
 import { ProductData } from "@/app/utils/types";
-import { useState } from "react";
 
 type usePostDataProps = {
   setData: React.Dispatch<React.SetStateAction<ProductData[]>>;
 }
 
 const usePostData = ({ setData }: usePostDataProps) => {
-  const [error, setError] = useState(true);
 
 
   const sendData = async (data: ProductData) => {
@@ -18,7 +16,6 @@ const usePostData = ({ setData }: usePostDataProps) => {
           ...prevState,
           response.data
         ]);
-        setError(false);
       }
     } catch (err: unknown) {
       if (err instanceof SyntaxError) {
@@ -26,11 +23,9 @@ const usePostData = ({ setData }: usePostDataProps) => {
       }
     }
   }
-  console.log(error);
 
   return {
     sendData,
-    error
   }
 
 }
